@@ -14,17 +14,34 @@ document.getElementById("dob").addEventListener("change", function () {
 });
 
 
-// Password validation
 document.getElementById("registerForm").addEventListener("submit", function (e) {
+    e.preventDefault(); // stop default submit
+
     let pass = document.getElementById("password").value;
     let confirmPass = document.getElementById("confirmPassword").value;
+    let contact = document.getElementById("contact").value;
 
+    // ❌ Password mismatch
     if (pass !== confirmPass) {
         alert("Passwords do not match!");
-        e.preventDefault();
-    } else {
-        alert("Form submitted successfully!");
+        return;
     }
+
+    // ❌ Contact not 10 digits
+    if (contact.length !== 10) {
+        alert("Contact number must be exactly 10 digits!");
+        return;
+    }
+
+    // ✅ Success Popup
+    alert("🎉 Form submitted successfully!");
+
+    // Optional: reset form
+    document.getElementById("registerForm").reset();
+
+    // Clear messages after reset
+    document.getElementById("passwordMessage").textContent = "";
+    document.getElementById("contactMessage").textContent = "";
 });
 // 🔥 Real-time password strength checker
 document.getElementById("password").addEventListener("input", function () {
@@ -93,5 +110,21 @@ passwordField.addEventListener("input", function () {
     else {
         message.textContent = "Medium password, try adding numbers & uppercase letters";
         message.style.color = "orange";
+    }
+});
+// 📱 Contact number exact 10 digit validation
+const contactField = document.getElementById("contact");
+const contactMsg = document.getElementById("contactMessage");
+
+contactField.addEventListener("input", function () {
+    this.value = this.value.replace(/[^0-9]/g, '');
+
+    if (this.value.length < 10) {
+        contactMsg.textContent = "Enter exactly 10 digits";
+        contactMsg.style.color = "red";
+    } 
+    else if (this.value.length === 10) {
+        contactMsg.textContent = "Valid contact number";
+        contactMsg.style.color = "green";
     }
 });

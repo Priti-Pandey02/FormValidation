@@ -180,3 +180,9 @@ button:hover::after {
     font-weight: 500;
     transition: 0.3s;
 }
+/* 📱 Contact validation message */
+#contactMessage {
+    font-size: 12px;
+    margin-top: 5px;
+    font-weight: 500;
+}
